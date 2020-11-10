@@ -1,35 +1,30 @@
 import React, { useState } from 'react';
 
-const App=()=>{
-    const stateBG=useState(()=>{
-        //console.log('red');
-        return 'red';
-    });
-    const [currStateBG,updateStateBG]=stateBG;
-
+const App=(props)=>{
     const stateName=useState(()=>{
-        return 'First!';
+        return '';
     });
 
-    const [currName,updateName]=stateName;
-    const bgChange=()=>{
-        updateName('First!');
-        updateStateBG('red');
+    const [fullName,setFullName]=useState();
+    const [currName,setName]=stateName;
+
+    const InputHandler=(event)=>{
+        setName(event.target.value);
     };
 
-    const nameChange=()=>{
-        updateName('Second!');
-        
-        updateStateBG('cyan');
+    const submission=()=>{
+        setFullName(currName);
     };
+
+    
     return(
         <>
-            <div style={{backgroundColor:currStateBG}}>
-                <button onMouseOver={bgChange} onMouseOut={nameChange}>{currName}</button>
-            </div>
+            <h1>Hello! {fullName}</h1>
+            <input type='text' placeholder='Enter your name' onChange={InputHandler} value={currName} />
+            <br />
+            <button onClick={submission}>Submit</button>
         </>
     );
 }
-
 
 export default App;
