@@ -1,24 +1,35 @@
 import React, { useState } from 'react';
 
 const App=()=>{
-    let time=new Date().toLocaleTimeString();
+    const stateBG=useState(()=>{
+        //console.log('red');
+        return 'red';
+    });
+    const [currStateBG,updateStateBG]=stateBG;
 
-    const hook=useState(()=>time);
-    const [currTime,setTime]=hook;
+    const stateName=useState(()=>{
+        return 'First!';
+    });
 
-    const RefreshTime=()=>{
-        time=new Date().toLocaleTimeString();
-        setTime(time);
-    }
+    const [currName,updateName]=stateName;
+    const bgChange=()=>{
+        updateName('First!');
+        updateStateBG('red');
+    };
 
-    setInterval(RefreshTime,1000);
+    const nameChange=()=>{
+        updateName('Second!');
+        
+        updateStateBG('cyan');
+    };
     return(
         <>
-            <h1>{currTime}</h1>
+            <div style={{backgroundColor:currStateBG}}>
+                <button onMouseOver={bgChange} onMouseOut={nameChange}>{currName}</button>
+            </div>
         </>
-        
-
     );
 }
+
 
 export default App;
