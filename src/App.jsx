@@ -1,25 +1,23 @@
-import React from 'react';
-import Cards from './Cards';
-import seriesData from './seriesData';
-function App(){
-    let cssStyle={color:'green'};
+import React, { useState } from 'react';
+
+const App=()=>{
+    let time=new Date().toLocaleTimeString();
+
+    const hook=useState(()=>time);
+    const [currTime,setTime]=hook;
+
+    const RefreshTime=()=>{
+        time=new Date().toLocaleTimeString();
+        setTime(time);
+    }
+
+    setInterval(RefreshTime,1000);
     return(
         <>
-            <h1 className='heading_style' style={cssStyle}>This is my list of fave movies and series</h1>
-            
-
-            {seriesData.map((val) => {
-                return(
-                    <Cards 
-                    imgSource={val.imgSource}
-                    title={val.title}
-                    link={val.link}
-                    message={val.message}
-                    />
-                );
-                
-            })}
+            <h1>{currTime}</h1>
         </>
+        
+
     );
 }
 
