@@ -23,7 +23,19 @@ const App=()=>{
             return{
                 ...prevValue,
                 [name]:value,
-            }
+                //in name's value value is assigned
+                /*example: const animalSounds = {cat: 'meow', dog: 'bark'};
+
+                    const animal = 'lion';
+
+                    const sound = 'roar';
+
+                    {...animalSounds, [animal]: sound};
+                    The result will be
+
+                    {cat: 'meow', dog: 'bark', lion: 'roar'};
+            */
+           }
         });
 
     }
