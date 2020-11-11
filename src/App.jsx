@@ -7,47 +7,22 @@ const App=()=>{
        lname: '',
        mail: '',
        mobile: '',
+       remarks: '',
     });
 
     const [valuee,updateValue]=state;
 
     const inputEvent=(event)=>{
-        console.log(event.target.value);
-        console.log(event.target.name);
+        //console.log(event.target.value);
+        //console.log(event.target.name);
         const value=event.target.value;
         const name=event.target.name;
         
         updateValue((prevValue)=>{
             //console.log(prevValue);
-            if(name==='fname'){
-                return{
-                fname: value,
-                lname:  prevValue.lname,
-                mail:  prevValue.mail,
-                mobile:  prevValue.mobile,
-            };
-                
-            }else if(name==='lname'){
-                return{
-                    fname: prevValue.fname,
-                lname:  value,
-                mail:  prevValue.mail,
-                mobile:  prevValue.mobile,
-                };
-            }else if(name==='mail'){
-                return{
-                    fname: prevValue.fname,
-                lname:  prevValue.lname,
-                mail:  value,
-                mobile:  prevValue.mobile,
-                };
-            }else if(name==='mobile'){
-                return{
-                    fname: prevValue.fname,
-                lname:  prevValue.lname,
-                mail:  prevValue.mail,
-                mobile:  value,
-                };
+            return{
+                ...prevValue,
+                [name]:value,
             }
         });
 
@@ -64,6 +39,7 @@ const App=()=>{
             <h1>Hello {valuee.fname} {valuee.lname}</h1>
             <h2>{valuee.mail}</h2>
             <h3>{valuee.mobile}</h3>
+            <p>{valuee.remarks}</p>
 
             <input type='text' placeholder='Enter your first name here' 
                 name='fname' onChange={inputEvent} /><br /><br />
@@ -73,6 +49,9 @@ const App=()=>{
                 onChange={inputEvent} /><br /><br />
             <input type='text' name='mobile' 
                 onChange={inputEvent} /><br /><br /> 
+
+            <input type='text' placeholder='Enter your remarks here' 
+                name='remarks' onChange={inputEvent} /><br /><br />
             <button>Submit</button>
         </form>
         </>
