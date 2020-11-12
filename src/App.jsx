@@ -1,73 +1,45 @@
 import React, { useState } from 'react';
-//import ReactDom from 'react-dom';
+import ToDoList from './ToDoList';
 
 const App=()=>{
-    const state=useState({
-       fname: '',
-       lname: '',
-       mail: '',
-       mobile: '',
-       remarks: '',
-    });
+    const [item,setItem]=useState('');
+    const [arr,setArr]=useState([]);
+    const AddItems=(event)=>{
+        setItem(()=>{
+            return event.target.value;
+        })
+    };
 
-    const [valuee,updateValue]=state;
-
-    const inputEvent=(event)=>{
-        //console.log(event.target.value);
-        //console.log(event.target.name);
-        const value=event.target.value;
-        const name=event.target.name;
-        
-        updateValue((prevValue)=>{
-            //console.log(prevValue);
-            return{
-                ...prevValue,
-                [name]:value,
-                //in name's value value is assigned
-                /*example: const animalSounds = {cat: 'meow', dog: 'bark'};
-
-                    const animal = 'lion';
-
-                    const sound = 'roar';
-
-                    {...animalSounds, [animal]: sound};
-                    The result will be
-
-                    {cat: 'meow', dog: 'bark', lion: 'roar'};
-            */
-           }
+    const ItemsOnAdd=()=>{
+        setArr(()=>{
+            return [...arr,item];
         });
+        setItem('');
+    };
 
-    }
-
-
-    const onSubmits=(event)=>{
-        event.preventDefault();
-        alert('form submitted!');
-    }
+    
     return(
         <>
-        <form onSubmit={onSubmits}>
-            <h1>Hello {valuee.fname} {valuee.lname}</h1>
-            <h2>{valuee.mail}</h2>
-            <h3>{valuee.mobile}</h3>
-            <p>{valuee.remarks}</p>
+            <div className='outer_div'>
+                <div className='inner_div'>
+                    <h1>To Do list</h1>
+                    <input type='text' placeholder='Add a new item' 
+                    name='add_item' onChange={AddItems} value={item} />
+                    <button className='add_button' onClick={ItemsOnAdd}>+</button>
+                    <ol>
+                        {arr.map((arr_items,index)=>{
+                            return(
+                                <ToDoList 
+                                text={arr_items}
 
-            <input type='text' placeholder='Enter your first name here' 
-                name='fname' onChange={inputEvent} /><br /><br />
-            <input type='text' placeholder='Enter your last name here' 
-                name='lname' onChange={inputEvent} /><br /><br />
-            <input type='email' name='mail' 
-                onChange={inputEvent} /><br /><br />
-            <input type='text' name='mobile' 
-                onChange={inputEvent} /><br /><br /> 
-
-            <input type='text' placeholder='Enter your remarks here' 
-                name='remarks' onChange={inputEvent} /><br /><br />
-            <button>Submit</button>
-        </form>
+                            />
+                            );
+                            
+                        })}   
+                    </ol>
+                </div>
+            </div>
         </>
     );
 }
-
 export default App;
